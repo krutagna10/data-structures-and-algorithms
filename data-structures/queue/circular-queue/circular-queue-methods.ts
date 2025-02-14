@@ -1,4 +1,4 @@
-class Queue<Type> {
+class CircularQueue<Type> {
   items: Type[];
 
   constructor() {
@@ -22,18 +22,16 @@ class Queue<Type> {
     }
     return this.items[0];
   }
+  
+  isEmpty(): boolean {
+    return this.size() === 0;
+  }
 
   size(): number {
     return this.items.length;
-  }
-
-  isEmpty(): boolean {
-    return this.size() === 0;
   }
 
   clear(): void {
     this.items = [];
   }
 }
-
-
