@@ -1,5 +1,5 @@
 class Stack<Type> {
-  items: Type[];
+  private items: Type[];
 
   constructor() {
     this.items = [];
@@ -11,23 +11,21 @@ class Stack<Type> {
 
   pop(): Type {
     if (this.isEmpty()) {
-      throw new Error("Stack Underflow: Cannot pop, stack is empty");
+      throw new Error("Stack Underflow");
     }
-
-    const removedValue = this.items.pop() as Type;
-    return removedValue;
+    return this.items.pop as Type;
   }
 
   peek(): Type {
     if (this.isEmpty()) {
-      throw new Error("Stack is empty, cannot peek");
+      throw new Error("Stack Underflow");
     }
 
-    return this.items[this.items.length - 1];
+    return this.items[this.size() - 1];
   }
 
   isEmpty(): boolean {
-    return this.items.length === 0;
+    return this.size() === 0;
   }
 
   clear(): void {
