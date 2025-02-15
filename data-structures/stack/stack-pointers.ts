@@ -28,7 +28,7 @@ class Stack<Type> {
 
   peek(): Type {
     if (this.isEmpty()) {
-      throw new Error("Stack Underflow");
+      throw new Error("Stack is Empty");
     }
     return this.items[this.top];
   }

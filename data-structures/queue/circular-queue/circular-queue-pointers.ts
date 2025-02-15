@@ -38,7 +38,7 @@ class CircularQueue<Type> {
 
   peek(): Type {
     if (this.isEmpty()) {
-      throw new Error("Queue Underflow");
+      throw new Error("Queue is Empty");
     }
     return this.items[this.front];
   }
