@@ -42,14 +42,14 @@ class Queue<Type> {
     return this.start === -1;
   }
 
-  isFull(): boolean { 
+  isFull(): boolean {
     return this.getSize() === this.front;
   }
 
   getSize(): number {
     return this.rear + 1;
   }
-  
+
   clear(): void {
     this.items = new Array(this.front);
     this.start = -1;
