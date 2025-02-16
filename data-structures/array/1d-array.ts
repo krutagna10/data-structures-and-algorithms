@@ -32,5 +32,3 @@ fruits.splice(1, 1);
 
 // Slice() => Copy the array from index start to end in a new array
 const slicedFruits = fruits.slice(0, 1);
-
-// Concat() => Create new array with values from other array & additional items
