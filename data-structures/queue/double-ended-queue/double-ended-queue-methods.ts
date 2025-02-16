@@ -5,22 +5,22 @@ class DoubleEndedQueue<Type> {
     this.items = [];
   }
 
-  addFront(value: Type): void {
+  enqueueFront(value: Type): void {
     this.items.unshift(value); 
   }
 
-  addRear(value: Type): void {
+  enqueueRear(value: Type): void {
     this.items.push(value);
   }
 
-  removeFront(): Type {
+  dequeueFront(): Type {
     if (this.isEmpty()) {
       throw new Error("Queue Underflow");
     }
     return this.items.shift() as Type;
   }
 
-  removeRear(): Type {
+  dequeueRear(): Type {
     if (this.isEmpty()) {
       throw new Error("Queue Underflow");
     }
@@ -40,14 +40,14 @@ class DoubleEndedQueue<Type> {
       throw new Error("Queue is Empty");
     }
 
-    return this.items[this.size() - 1];
+    return this.items[this.getSize() - 1];
   }
 
   isEmpty(): boolean {
-    return this.size() === 0;
+    return this.getSize() === 0;
   }
 
-  size(): number {
+  getSize(): number {
     return this.items.length;
   }
 

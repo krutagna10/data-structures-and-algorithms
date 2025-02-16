@@ -1,8 +1,8 @@
-class CircularQueue<Type> {
+class DoubleEndedQueue<Type> {
   items: Type[];
+  size: number;
   front: number;
   rear: number;
-  size: number;
 
   constructor(size: number) {
     this.items = new Array(size);
@@ -11,41 +11,79 @@ class CircularQueue<Type> {
     this.size = size;
   }
 
-  enqueue(value: Type): void {
+  enqueueFront(value: Type): void {
     if (this.isFull()) {
       throw new Error("Queue Overflow");
     }
 
     if (this.isEmpty()) {
       this.front = 0;
+      this.rear = 0;
+    } else if (this.front === 0) {
+      this.front = this.size - 1;
+    } else {
+      this.front--;
     }
-    this.rear = (this.rear + 1) % this.size;
+    this.items[this.front] = value;
+  }
+
+  enqueueRear(value: Type): void {
+    if (this.isFull()) {
+      throw new Error("Queue Overflow");
+    }
+
+    if (this.isEmpty()) {
+      this.front = 0;
+      this.rear = 0;
+    } else {
+      this.rear = (this.rear + 1) % this.size;
+    }
     this.items[this.rear] = value;
   }
 
-  dequeue(): Type {
+  dequeueFront(): Type {
     if (this.isEmpty()) {
       throw new Error("Queue Underflow");
     }
 
-    const removedElement = this.peek();
+    const removedElement = this.getFront();
     if (this.front === this.rear) {
-      this.front = -1;
-      this.rear = -1;
+      this.clear();
     } else {
       this.front = (this.front + 1) % this.size;
     }
     return removedElement;
   }
 
-  peek(): Type {
+  dequeueRear(): Type {
+    if (this.isEmpty()) {
+      throw new Error("Queue Underflow");
+    }
+
+    const removedElement = this.getRear();
+    if (this.rear === 0) {
+      this.rear = this.size - 1;
+    } else {
+      this.rear--;
+    }
+    return removedElement;
+  }
+
+  getFront(): Type {
     if (this.isEmpty()) {
       throw new Error("Queue is Empty");
     }
     return this.items[this.front];
   }
 
-  isEmpty() {
+  getRear(): Type {
+    if (this.isEmpty()) {
+      throw new Error("Queue is Empty");
+    }
+    return this.items[this.rear];
+  }
+
+  isEmpty(): boolean {
     return this.front === -1 && this.rear === -1;
   }
 

@@ -24,10 +24,10 @@ class CircularQueue<Type> {
   }
   
   isEmpty(): boolean {
-    return this.size() === 0;
+    return this.getSize() === 0;
   }
 
-  size(): number {
+  getSize(): number {
     return this.items.length;
   }
 

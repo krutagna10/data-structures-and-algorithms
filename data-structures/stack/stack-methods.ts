@@ -21,18 +21,18 @@ class Stack<Type> {
       throw new Error("Stack is Empty");
     }
 
-    return this.items[this.size() - 1];
+    return this.items[this.getSize() - 1];
   }
 
   isEmpty(): boolean {
-    return this.size() === 0;
+    return this.getSize() === 0;
   }
 
   clear(): void {
     this.items = [];
   }
 
-  size(): number {
+  getSize(): number {
     return this.items.length;
   }
 }
