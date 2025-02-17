@@ -1,16 +1,23 @@
-const fruits = ["Apple", "Banana", "Pear", "Pineapple", "Grapes"];
+// Initializing arrays
+const emptyArray = new Array(3);
+const fruits = ["apple", "banana", "pear", "pineapple", "grapes"];
 let users = [
   { id: 1, name: "John", age: 21 },
   { id: 2, name: "Pete", age: 25 },
   { id: 3, name: "Mary", age: 27 },
 ];
 const numbers = [3, 4, 9, 1, 2];
+const matrix = [
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9],
+];
 
 // length => calculate the length of the array
 const fruitsLength = fruits.length;
 
 // replacing elements at an index
-fruits[0] = "Guava";
+fruits[0] = "guava";
 
 // looping over the array
 for (let i = 0; i < fruits.length; i++) {
@@ -26,10 +33,10 @@ fruits.forEach((fruit, index) => {
 });
 
 // push() => add elements at the end of the array
-fruits.push("Watermelon");
+fruits.push("watermelon");
 
 // unshift() => add elements at the start of the array
-fruits.unshift("Orange");
+fruits.unshift("orange");
 
 // pop() => remove elements from the end of the array
 fruits.pop();
@@ -44,16 +51,22 @@ fruits.splice(1, 1);
 const slicedFruits = fruits.slice(0, 1);
 
 // concat() => create a new array that includes values from other arrays & new items
-const concatenatedFruits = fruits.concat(["Cherry", "Litchi"], "Strawberry");
+const concatenatedFruits = fruits.concat(["cherry", "litchi"], "strawberry");
+
+// flat() => returns an array with sub-array elements concatenated up to specified depth
+const flatArray = matrix.flat();
+
+// flatMap() => returns a array formed by appying given callback function to each element of the array, and then flattening the result by one level
+const flatMapArray = numbers.flatMap((num) => new Array(3).fill(num));
 
 // indexOf() => returns the first index where element was found, otherwise -1
-const waterMelonIndex = fruits.indexOf("Watermelon");
+const waterMelonIndex = fruits.indexOf("watermelon");
 
 // lastIndexOf() => returns the last index where element was found, otherwise -1
-const guavaIndex = fruits.lastIndexOf("Guava");
+const guavaIndex = fruits.lastIndexOf("guava");
 
 // includes() => returns true if element is in array, otherwise false
-const hasApple = fruits.includes("Apple");
+const hasApple = fruits.includes("apple");
 
 // find() =>returns element if it is found, otherwise undefined
 const john = users.find((user) => user.name === "John");
@@ -77,7 +90,7 @@ const filteredUsers = users.filter((user) => user.id < 3);
 const usersName = users.map((user) => user.name);
 
 // reduce() => returns a single value based of some operatons
-const totalAge = users.reduce((acc, user) => acc + user.age , 0);
+const totalAge = users.reduce((acc, user) => acc + user.age, 0);
 
 // sort() => sorts the array, changing the element order
 numbers.sort((a, b) => a - b);
@@ -86,7 +99,7 @@ numbers.sort((a, b) => b - a);
 // reverse() => reverse the order of elements in array
 numbers.reverse();
 
-// join() => returns a sting by joining the elements 
+// join() => returns a sting by joining the elements
 const joinedFruits = fruits.join(", ");
 
 // split() => returns the array formed by splitting the strings
@@ -97,5 +110,3 @@ const filledArray = new Array(3).fill(0);
 
 // Array.isArray() => returns true if value is an array, otherwise false
 const isArray = Array.isArray(fruits);
-
-
