@@ -42,9 +42,7 @@ class SinglyLinkedList<T> {
     this.length++;
   }
 
-  inser() {
-    
-  }
+  insert() {}
 
   shift() {
     if (!this.head) {
@@ -102,7 +100,7 @@ class SinglyLinkedList<T> {
   }
 
   set(index: number, val: T): boolean {
-    const currNode = this.get(index) ;
+    const currNode = this.get(index);
     if (currNode) {
       currNode.val = val;
       return true;
