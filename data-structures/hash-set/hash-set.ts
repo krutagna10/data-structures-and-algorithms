@@ -1,5 +1,5 @@
 // Initializing a set
-const emptySet = new Set();
+const emptySet = new Set<string>();
 const fruits = new Set([ "oranges", "apples", "banana"]);
 
 // Iterating over the set
