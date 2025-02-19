@@ -1,8 +1,8 @@
 class Node<T> {
-  val: T;
+  value: T;
   next: null | Node<T>;
-  constructor(val: T) {
-    this.val = val;
+  constructor(value: T) {
+    this.value = value;
     this.next = null;
   }
 }
@@ -16,8 +16,8 @@ class SinglyLinkedList<T> {
     this.tail = null;
   }
 
-  unshift(val: T): void {
-    const newNode = new Node(val);
+  addFirst(value: T): void {
+    const newNode = new Node(value);
     if (this.isEmpty()) {
       this.head = newNode;
       this.tail = newNode;
@@ -27,8 +27,8 @@ class SinglyLinkedList<T> {
     }
   }
 
-  push(val: T): void {
-    const newNode = new Node(val);
+  addLast(value: T): void {
+    const newNode = new Node(value);
     if (this.isEmpty()) {
       this.head = newNode;
       this.tail = newNode;
@@ -38,17 +38,17 @@ class SinglyLinkedList<T> {
     }
   }
 
-  insert(index: number, val: T): boolean {
+  add(index: number, value: T): boolean {
     if (index < 0 || index > this.size()) {
       return false;
     }
 
     if (index === 0) {
-      this.unshift(val);
-    } else if (index ===this.size() ) {
-      this.push(val);
+      this.addFirst(value);
+    } else if (index === this.size()) {
+      this.addLast(value);
     } else {
-      const newNode = new Node(val);
+      const newNode = new Node(value);
       const currNode = this.get(index);
       const prevNode = this.get(index - 1);
       prevNode.next = newNode;
@@ -57,7 +57,7 @@ class SinglyLinkedList<T> {
     return true;
   }
 
-  shift(): void {
+  removeFirst(): void {
     if (this.isEmpty()) {
       throw new Error("Linked List Underflow");
     }
@@ -70,7 +70,7 @@ class SinglyLinkedList<T> {
     }
   }
 
-  pop(): void {
+  removeLast(): void {
     if (this.isEmpty()) {
       throw new Error("Linked List Underflow");
     }
@@ -79,12 +79,12 @@ class SinglyLinkedList<T> {
       this.head = null;
       this.tail = null;
     } else {
-      let currNodej = this.head;
-      let prevNode = currNodej;
+      let currNode = this.head;
+      let prevNode = currNode;
 
-      while (currNodej.next !== null) {
-        prevNode = currNodej;
-        currNodej = currNodej.next;
+      while (currNode.next !== null) {
+        prevNode = currNode;
+        currNode = currNode.next;
       }
       this.tail = prevNode;
       this.tail.next = null;
@@ -96,17 +96,46 @@ class SinglyLinkedList<T> {
       return false;
     }
 
-
     if (index === 0) {
-      this.shift();
+      this.removeFirst();
     } else if (index === this.size() - 1) {
-      this.pop();
+      this.removeLast();
     } else {
       const currNode = this.get(index);
       const prevNode = this.get(index - 1);
       prevNode.next = currNode.next;
     }
     return true;
+  }
+
+  contains(value: T): boolean {
+    if (this.isEmpty()) {
+      return false;
+    }
+
+    let currNode = this.head;
+    while (currNode) {
+      if (currNode.value === value) {
+        return true;
+      }
+    }
+  }
+
+  indexOf(value: T): number {
+    if (this.isEmpty()) {
+      return -1;
+    }
+
+    let index = 0;
+    let currNode = this.head;
+    while (currNode) {
+      if (currNode.value === value) {
+        return index;
+      }
+      currNode = currNode.next
+      index++;
+    }
+    return -1;
   }
 
   get(index: number): Node<T> | undefined {
@@ -120,20 +149,20 @@ class SinglyLinkedList<T> {
     return currNode;
   }
 
-  set(index: number, val: T): boolean {
+  set(index: number, value: T): boolean {
     const currNode = this.get(index);
     if (currNode) {
-      currNode.val = val;
+      currNode.value = value;
       return true;
     }
     return false;
   }
 
-  values(): T[] {
+  toArray(): T[] {
     let currNode = this.head;
     const values = [];
     while (currNode) {
-      values.push(currNode.val);
+      values.push(currNode.value);
       currNode = currNode.next;
     }
     return values;
