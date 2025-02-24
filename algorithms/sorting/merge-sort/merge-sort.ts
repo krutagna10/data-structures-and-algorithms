@@ -20,8 +20,8 @@ function merge(arr: number[], low: number, mid: number, high: number): void {
     combinedArr[k++] = arr[j++];
   }
 
-  for (let m = low; m <= high; m++) {
-    arr[m] = combinedArr[m - low];
+  for (let i = low; i <= high; i++) {
+    arr[i] = combinedArr[i - low];
   }
 }
 
