@@ -1,5 +1,5 @@
 // Intialiazing a 2d array
-const emptyArray = new Array(3).fill(0).map(() => new Array(3));
+const emptyArray = Array.from({ length: 3 }, () => new Array(3));
 const matrix = [
   [1, 2, 3],
   [4, 5, 6],
@@ -19,4 +19,3 @@ for (let col = 0; col < matrix[0].length; col++) {
     const currElement = matrix[row][col];
   }
 }
-
