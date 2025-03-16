@@ -1,11 +1,6 @@
 import { test, expect } from "@jest/globals";
 import Stack from "../src/stack";
 
-test("should create an empty stack", () => {
-  const stack = new Stack<number>();
-  expect(stack).not.toBeNull();
-});
-
 test("should push elements to stack", () => {
   const stack = new Stack<number>();
   stack.push(10);

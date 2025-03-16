@@ -1,21 +1,42 @@
+/**
+ * Class representing a node
+ * @template T - the Type of value stored in the node
+ */
 class Node<T> {
   value: T;
   next: null | Node<T>;
+
+  /**
+   * Creates a node instance
+   * @param {T} value - The value to be stored in the node
+   */
   constructor(value: T) {
     this.value = value;
     this.next = null;
   }
 }
 
+/**
+ * Class representing a singly linked list
+ * @template T - The type of elements stored in the stack
+ */
 class SinglyLinkedList<T> {
   head: null | Node<T>;
   tail: null | Node<T>;
 
+  /**
+   * Creates a singly linked list instance
+   */
   constructor() {
     this.head = null;
     this.tail = null;
   }
 
+  /**
+   * Adds element at the start of linked list
+   * @param {T} value - The value to be added to linked list
+   * @returns {void}
+   */
   addFirst(value: T): void {
     const newNode = new Node(value);
     if (this.isEmpty()) {
@@ -27,6 +48,11 @@ class SinglyLinkedList<T> {
     }
   }
 
+  /**
+   * Adds element at the end of linked list
+   * @param {T} value - The value to be added to linked list
+   * @returns {void}
+   */
   addLast(value: T): void {
     const newNode = new Node(value);
     if (this.isEmpty()) {
@@ -38,9 +64,15 @@ class SinglyLinkedList<T> {
     }
   }
 
-  add(index: number, value: T): boolean {
+  /**
+   * Adds element at a specified index in linked list
+   * @param {number} index - The index at which element will be added
+   * @param {T} value - The value to be added to linked list
+   * @returns {void}
+   */
+  add(index: number, value: T): void {
     if (index < 0 || index > this.size()) {
-      return false;
+      throw new Error("Invalid Index");
     }
 
     if (index === 0) {
@@ -54,9 +86,12 @@ class SinglyLinkedList<T> {
       prevNode.next = newNode;
       newNode.next = currNode;
     }
-    return true;
   }
 
+  /**
+   * Removes first element from the linked list
+   * @returns {void}
+   */
   removeFirst(): void {
     if (this.isEmpty()) {
       throw new Error("Linked List Underflow");
@@ -70,6 +105,10 @@ class SinglyLinkedList<T> {
     }
   }
 
+  /**
+   * Removes last element from the linked list
+   * @returns {void}
+   */
   removeLast(): void {
     if (this.isEmpty()) {
       throw new Error("Linked List Underflow");
@@ -91,6 +130,11 @@ class SinglyLinkedList<T> {
     }
   }
 
+  /**
+   * Removes element at a specified index from the linked list
+   * @param {number} index - The index of element which will be removed
+   * @returns {boolean} - `true` if element is successfully removed, `false` otherwise
+   */
   remove(index: number): boolean {
     if (index < 0 || index > this.size() - 1) {
       return false;
@@ -108,6 +152,11 @@ class SinglyLinkedList<T> {
     return true;
   }
 
+  /**
+   * Checks whether linked list contains a value
+   * @param {T} value - The value to be checked
+   * @returns {boolean} - `true` if value is present in linked list, `false` otherwise
+   */
   contains(value: T): boolean {
     if (this.isEmpty()) {
       return false;
@@ -132,7 +181,7 @@ class SinglyLinkedList<T> {
       if (currNode.value === value) {
         return index;
       }
-      currNode = currNode.next
+      currNode = currNode.next;
       index++;
     }
     return -1;
@@ -191,3 +240,5 @@ class SinglyLinkedList<T> {
     this.tail = null;
   }
 }
+
+export default SinglyLinkedList;

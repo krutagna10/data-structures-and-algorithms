@@ -1,6 +1,6 @@
 /**
  * Class representing a node
- * @template T - The type of value stored in node.
+ * @template T - The type of value stored in node
  */
 class Node<T> {
   value: T;
@@ -8,7 +8,7 @@ class Node<T> {
 
   /**
    * Creates a node instance
-   * @param {T} value - The value to be stored in the node.
+   * @param {T} value - The value to be stored in the node
    */
   constructor(value: T) {
     this.value = value;
