@@ -18,7 +18,7 @@ class Node<T> {
 
 /**
  * Class representing a singly linked list
- * @template T - The type of elements stored in the stack
+ * @template T - The type of elements stored in the linked list
  */
 class SinglyLinkedList<T> {
   head: null | Node<T>;

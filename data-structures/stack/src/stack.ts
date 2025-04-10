@@ -96,7 +96,7 @@ class Stack<T> {
 
   /**
    * Checks whether the stack is empty
-   * @returns {boolean} - `true` if stack is empty, false otherwise
+   * @returns {boolean} - `true` if stack is empty, `false` otherwise
    */
   isEmpty(): boolean {
     return this.head === null;
