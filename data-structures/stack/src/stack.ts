@@ -33,7 +33,7 @@ class Stack<T> {
   }
 
   /**
-   * Pushes element at the pop of stack
+   * Pushes element at the top of stack
    * @param {T} value - The value to be added to stack
    * @returns {void}
    */
