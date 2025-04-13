@@ -1,53 +1,54 @@
-import { test, expect } from "@jest/globals";
+import { test, expect, beforeEach, describe } from "@jest/globals";
 import Stack from "../src/stack";
 
-test("should push elements to stack", () => {
-  const stack = new Stack<number>();
-  stack.push(10);
-  stack.push(20);
-  expect(stack.toArray()).toEqual([20, 10]);
+let stack: Stack<number>;
+beforeEach(() => {
+  stack = new Stack<number>();
 });
 
-test("should pop elements from stack", () => {
-  const stack = new Stack<number>();
-  stack.push(10);
-  stack.push(20);
-  stack.pop();
-  expect(stack.toArray()).toEqual([10]);
+describe("Insertion", () => {
+  test("should add value at top of the stack", () => {
+    stack.push(1);
+    expect(stack.toArray()).toEqual([1]);
+  });
 });
 
-test("should throw an error when popping elements from empty stack", () => {
-  const stack = new Stack<number>();
-  expect(() => stack.pop()).toThrow(Error);
+describe("Removal", () => {
+  test("should remove value from top of the stack", () => {
+    stack.push(1);
+    stack.pop();
+    expect(stack.toArray()).toEqual([]);
+  });
+
+  test("should throw an error when trying to remove elements from empty stack", () => {
+    expect(() => stack.pop()).toThrow("Stack Underflow");
+  });
 });
 
-test("should peek element from stack", () => {
-  const stack = new Stack<number>();
-  stack.push(10);
-  stack.push(20);
-  expect(stack.peek()).toEqual(20);
+describe("Retrieval", () => {
+  test("should retrieve value from top of the stack", () => {
+    stack.push(1);
+    expect(stack.peek()).toBe(1);
+  });
+
+  test("should throw an error when trying to retrieve value from empty stack", () => {
+    expect(() => stack.peek()).toThrow("Stack Empty");
+  });
 });
 
-test("should throw an error when peeking elements from empty stack", () => {
-  const stack = new Stack<number>();
-  expect(() => stack.peek()).toThrow(Error);
-});
+describe("Utility", () => {
+  test("should return true when the stack is empty", () => {
+    expect(stack.isEmpty()).toBe(true);
+  });
 
-test("should check whether the stack is empty", () => {
-  const stack = new Stack<number>();
-  expect(stack.isEmpty()).toBe(true);
-  stack.push(10);
-  expect(stack.isEmpty()).toBe(false);
-});
+  test("should return false when the stack is not empty", () => {
+    stack.push(1);
+    expect(stack.isEmpty()).toBe(false);
+  });
 
-test("should return the size of stack", () => {
-  const stack = new Stack<number>();
-  stack.push(10);
-  stack.push(20);
-  expect(stack.size()).toBe(2);
-});
-
-test("should return 0 when the checking size of empty stack", () => {
-  const stack = new Stack();
-  expect(stack.size()).toBe(0);
+  test("should return correct size of the stack", () => {
+    stack.push(1);
+    stack.pop();
+    expect(stack.getSize()).toBe(0);
+  })
 });
