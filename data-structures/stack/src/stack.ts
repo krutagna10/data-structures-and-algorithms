@@ -1,4 +1,4 @@
-import SinglyLinkedList from "../../linked-list/singly-linked-list/src/single-linked-list";
+import SinglyLinkedList from "../../linked-list/singly-linked-list/src/singly-linked-list";
 
 /**
  * Class representing a stack
@@ -17,13 +17,13 @@ class Stack<T> extends SinglyLinkedList<T> {
   /**
    * Pops value from top of the stack
    * @throws {Error} - An error when the stack is empty
-   * @returns {void}
+   * @returns {T} - The removed element
    */
-  pop(): void {
-    if (this.isEmpty()) {
+  pop(): T {
+    if (super.isEmpty()) {
       throw new Error("Stack Underflow");
     }
-    super.removeFirst();
+    return super.removeFirst();
   }
 
   /**
@@ -32,11 +32,12 @@ class Stack<T> extends SinglyLinkedList<T> {
    * @returns {T} - The value at top of the stack
    */
   peek(): T {
-    if (this.isEmpty()) {
+    if (super.isEmpty()) {
       throw new Error("Stack Empty");
     }
     return this.head.value;
   }
 }
+
 
 export default Stack;

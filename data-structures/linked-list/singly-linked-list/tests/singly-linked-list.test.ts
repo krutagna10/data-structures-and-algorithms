@@ -1,5 +1,5 @@
 import { test, expect, beforeEach, describe } from "@jest/globals";
-import SinglyLinkedList from "../src/single-linked-list";
+import SinglyLinkedList from "../src/singly-linked-list";
 
 let linkedList: SinglyLinkedList<number>;
 beforeEach(() => {
@@ -31,22 +31,19 @@ describe("Insertion", () => {
 describe("Removal", () => {
   test("should remove the first element from linked list", () => {
     linkedList.addFirst(1);
-    linkedList.removeFirst();
-    expect(linkedList.toArray()).toEqual([]);
+    expect(linkedList.removeFirst()).toBe(1);
   });
 
   test("should remove the last element from linked list", () => {
     linkedList.addLast(1);
-    linkedList.removeLast();
-    expect(linkedList.toArray()).toEqual([]);
+    expect(linkedList.removeLast()).toBe(1);
   });
 
   test("should remove element at the specified index in linked list", () => {
     linkedList.addLast(1);
     linkedList.addLast(2);
     linkedList.addLast(3);
-    linkedList.remove(1);
-    expect(linkedList.toArray()).toEqual([1, 3]);
+    expect(linkedList.remove(1)).toBe(2);
   });
 
   test("should throw an error when removing element from empty linked list", () => {
@@ -77,44 +74,42 @@ describe("Access & Mutation", () => {
 });
 
 describe("Search & Utility", () => {
-test("should return true when element is present in the linked list", () => {
-  linkedList.addLast(1);
-  expect(linkedList.includes(1)).toBe(true);
+  test("should return true when element is present in the linked list", () => {
+    linkedList.addLast(1);
+    expect(linkedList.includes(1)).toBe(true);
+  });
+
+  test("should return false when element is not present in the linked list", () => {
+    expect(linkedList.includes(1)).toBe(false);
+  });
+
+  test("should convert linked list values to an array", () => {
+    linkedList.addLast(1);
+    expect(linkedList.toArray()).toEqual([1]);
+  });
+
+  test("should return true when linked list is empty", () => {
+    expect(linkedList.isEmpty()).toBe(true);
+  });
+
+  test("should return false when linked list is not empty", () => {
+    linkedList.addLast(1);
+    expect(linkedList.isEmpty()).toBe(false);
+  });
+
+  test("should return the correct size of the linked list", () => {
+    linkedList.addFirst(1);
+    linkedList.addLast(2);
+    linkedList.add(2, 3);
+    linkedList.removeFirst();
+    linkedList.removeLast();
+    linkedList.remove(0);
+    expect(linkedList.size).toBe(0);
+  });
+
+  test("should clear the linked list", () => {
+    linkedList.addLast(1);
+    linkedList.clear();
+    expect(linkedList.isEmpty()).toBe(true);
+  });
 });
-
-test("should return false when element is not present in the linked list", () => {
-  expect(linkedList.includes(1)).toBe(false);
-});
-
-test("should convert linked list values to an array", () => {
-  linkedList.addLast(1);
-  expect(linkedList.toArray()).toEqual([1]);
-});
-
-test("should return true when linked list is empty", () => {
-  expect(linkedList.isEmpty()).toBe(true);
-});
-
-test("should return false when linked list is not empty", () => {
-  linkedList.addLast(1);
-  expect(linkedList.isEmpty()).toBe(false);
-});
-
-test("should return the correct size of the linked list", () => {
-  linkedList.addFirst(1);
-  linkedList.addLast(2);
-  linkedList.add(2, 3);
-  linkedList.removeFirst();
-  linkedList.removeLast();
-  linkedList.remove(0);
-  expect(linkedList.getSize()).toBe(0);
-});
-
-test("should clear the linked list", () => {
-  linkedList.addLast(1);
-  linkedList.clear();
-  expect(linkedList.isEmpty()).toBe(true);
-});
-})
-
-

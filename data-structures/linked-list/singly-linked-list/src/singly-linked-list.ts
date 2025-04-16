@@ -93,29 +93,38 @@ class SinglyLinkedList<T> {
 
   /**
    * Removes first element from the linked list
-   * @returns {void}
+   * @throws {Error} - An error when the linked list is empty
+   * @returns {T} - The removed element;
    */
-  removeFirst(): void {
+  removeFirst(): T {
+    let removedElement;
     if (this.isEmpty()) {
       throw new Error("Linked List Underflow");
     } else if (this.size === 1) {
+      removedElement = this.head.value;
       this.clear();
     } else {
+      removedElement = this.head.value;
       this.head = this.head.next;
       this.size--;
     }
+    return removedElement;
   }
 
   /**
    * Removes last element from the linked list
-   * @returns {void}
+   * @throws {Error} - An error when the linked list is empty
+   * @returns {T} - The removed element
    */
-  removeLast(): void {
+  removeLast(): T {
+    let removedElement;
     if (this.isEmpty()) {
       throw new Error("Linked List Underflow");
     } else if (this.size === 1) {
+      removedElement = this.tail.value;
       this.clear();
     } else {
+      removedElement = this.tail.value;
       let prevNode = this.head;
       let currNode = this.head;
       while (currNode.next) {
@@ -126,31 +135,35 @@ class SinglyLinkedList<T> {
       this.tail = prevNode;
       this.size--;
     }
+    return removedElement;
   }
 
   /**
    * Removes the element at a specified index
    * @param {number} index - The index of the element which will be removed
-   * @returns {void}
+   * @throws {Error} - An error when the index is invalid 
+   * @returns {T} - The removed element
    */
-  remove(index: number): void {
+  remove(index: number): T {
     if (index < 0 || index > this.size - 1) {
       throw new Error("Invalid Index");
     } else if (index === 0) {
-      this.removeFirst();
+      return this.removeFirst();
     } else if (index === this.size - 1) {
-      this.removeLast();
+      return this.removeLast();
     } else {
       const prevNode = this.get(index - 1);
       const currNode = this.get(index);
       prevNode.next = currNode.next;
       this.size--;
+      return currNode.value;
     }
   }
 
   /**
    * Gets the node at the specified index
    * @param {number} index - The index of node which will be returned
+   * @throws {Error} - An error when the index is invalid
    * @returns {Node<T>} - The node at the index
    */
   get(index: number): Node<T> {
@@ -216,14 +229,6 @@ class SinglyLinkedList<T> {
    */
   isEmpty(): boolean {
     return this.head === null && this.tail === null;
-  }
-
-  /**
-   * Gets the size of the linked list
-   * @returns {number} - The size of the linked list
-   */
-  getSize(): number {
-    return this.size;
   }
 
   /**

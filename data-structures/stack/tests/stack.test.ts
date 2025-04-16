@@ -16,8 +16,7 @@ describe("Insertion", () => {
 describe("Removal", () => {
   test("should remove value from top of the stack", () => {
     stack.push(1);
-    stack.pop();
-    expect(stack.toArray()).toEqual([]);
+    expect(stack.pop()).toBe(1);
   });
 
   test("should throw an error when trying to remove elements from empty stack", () => {
@@ -49,6 +48,12 @@ describe("Utility", () => {
   test("should return correct size of the stack", () => {
     stack.push(1);
     stack.pop();
-    expect(stack.getSize()).toBe(0);
+    expect(stack.size).toBe(0);
+  })
+
+  test("should clear the stack", () => {
+    stack.push(1);
+    stack.clear();
+    expect(stack.isEmpty()).toBe(true);
   })
 });
