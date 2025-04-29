@@ -7,16 +7,18 @@ class DoubleEndedQueue<T> {
   front: number;
   rear: number;
   size: number;
+  maxSize: number;
 
   /**
    * Creates a double ended queue instance
-   * @param {number} size - The stack of double ended queue
+   * @param {number} maxSize - The stack of double ended queue
    */
-  constructor(size: number) {
-    this.items = [];
+  constructor(maxSize: number) {
+    this.items = new Array(maxSize);
     this.front = -1;
     this.rear = -1;
-    this.size = size;
+    this.size = 0;
+    this.maxSize = maxSize;
   }
 
   /**
@@ -25,17 +27,17 @@ class DoubleEndedQueue<T> {
    * @returns {void}
    */
   enqueueFront(value: T): void {
-    if (this.isFull()) {
-      throw new Error("Double Ended Queue Overflow");
-    } else if (this.isEmpty()) {
+    if (this.isFull()) throw new Error("Double Ended Queue Overflow");
+    if (this.isEmpty()) {
       this.front = 0;
       this.rear = 0;
     } else if (this.front === 0) {
-      this.front = this.size - 1;
+      this.front = this.maxSize - 1;
     } else {
       this.front--;
     }
     this.items[this.front] = value;
+    this.size++;
   }
 
   /**
@@ -44,15 +46,15 @@ class DoubleEndedQueue<T> {
    * @returns {void}
    */
   enqueueRear(value: T): void {
-    if (this.isFull()) {
-      throw new Error("Double Ended Queue Overflow");
-    } else if (this.isEmpty()) {
+    if (this.isFull()) throw new Error("Double Ended Queue Overflow");
+    if (this.isEmpty()) {
       this.front = 0;
       this.rear = 0;
     } else {
-      this.rear = (this.rear + 1) % this.size;
+      this.rear = (this.rear + 1) % this.maxSize;
     }
     this.items[this.rear] = value;
+    this.size++;
   }
 
   /**
@@ -60,14 +62,14 @@ class DoubleEndedQueue<T> {
    * @returns {void}
    */
   dequeueFront(): void {
-    if (this.isEmpty()) {
-      throw new Error("Double Ended Queue Underflow");
-    } else if (this.front === this.rear) {
+    if (this.isEmpty()) throw new Error("Double Ended Queue Underflow");
+    if (this.front === this.rear) {
       this.front = -1;
       this.rear = -1;
     } else {
-      this.front = (this.front + 1) % this.size;
+      this.front = (this.front + 1) % this.maxSize;
     }
+    this.size--;
   }
 
   /**
@@ -75,17 +77,16 @@ class DoubleEndedQueue<T> {
    * @returns {void}
    */
   dequeueRear(): void {
-    let removedElement;
-    if (this.isEmpty()) {
-      throw new Error("Double Ended Queue Underflow");
-    } else if (this.front === this.rear) {
+    if (this.isEmpty()) throw new Error("Double Ended Queue Underflow");
+    if (this.front === this.rear) {
       this.front = -1;
       this.rear = -1;
     } else if (this.rear === 0) {
-      this.rear = this.size - 1;
+      this.rear = this.maxSize - 1;
     } else {
       this.rear--;
     }
+    this.size--;
   }
 
   /**
@@ -93,9 +94,7 @@ class DoubleEndedQueue<T> {
    * @returns {T} - The element at the front
    */
   getFront(): T {
-    if (this.isEmpty()) {
-      throw new Error("Double Unded Queue is Empty");
-    }
+    if (this.isEmpty()) throw new Error("Double Unded Queue is Empty");
     return this.items[this.front];
   }
 
@@ -104,18 +103,8 @@ class DoubleEndedQueue<T> {
    * @returns {T} - The element at the rear
    */
   getRear(): T {
-    if (this.isEmpty()) {
-      throw new Error("Double Unded Queue is Empty");
-    }
+    if (this.isEmpty()) throw new Error("Double Unded Queue is Empty");
     return this.items[this.rear];
-  }
-
-  /**
-   * Converts the double ended queue to an array
-   * @returns {T[]} - An array containing all the elements in the queue
-   */
-  toArray(): T[] {
-    return this.items;
   }
 
   /**
@@ -123,10 +112,7 @@ class DoubleEndedQueue<T> {
    * @returns {boolean} - `true` if double ended queue is full, `false` otherwise
    */
   isFull(): boolean {
-    return (
-      (this.front === 0 && this.rear === this.size - 1) ||
-      this.front === this.rear + 1
-    );
+    return this.size === this.maxSize;
   }
 
   /**
@@ -134,20 +120,7 @@ class DoubleEndedQueue<T> {
    * @returns {boolean} - `true` if double ended queue is empty, `false` otherwise
    */
   isEmpty(): boolean {
-    return this.front === -1 && this.rear === -1;
-  }
-
-  /**
-   * Calculates the size of double ended queue
-   * @returns {number} - The size of double ended queue
-   */
-  getSize(): number {
-    if (this.isEmpty()) {
-      return 0;
-    }
-    return this.front <= this.rear
-      ? this.rear - this.front + 1
-      : this.size - this.front + this.rear + 1;
+    return this.size === 0;
   }
 
   /**

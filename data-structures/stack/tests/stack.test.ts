@@ -7,14 +7,14 @@ beforeEach(() => {
 });
 
 describe("Insertion", () => {
-  test("should add value at top of the stack", () => {
+  test("should add element at top of the stack", () => {
     stack.push(1);
     expect(stack.toArray()).toEqual([1]);
   });
 });
 
 describe("Removal", () => {
-  test("should remove value from top of the stack", () => {
+  test("should remove element from top of the stack", () => {
     stack.push(1);
     expect(stack.pop()).toBe(1);
   });
@@ -25,12 +25,12 @@ describe("Removal", () => {
 });
 
 describe("Retrieval", () => {
-  test("should retrieve value from top of the stack", () => {
+  test("should retrieve element from top of the stack", () => {
     stack.push(1);
     expect(stack.peek()).toBe(1);
   });
 
-  test("should throw an error when trying to retrieve value from empty stack", () => {
+  test("should throw an error when trying to retrieve element from empty stack", () => {
     expect(() => stack.peek()).toThrow("Stack Empty");
   });
 });
@@ -57,3 +57,6 @@ describe("Utility", () => {
     expect(stack.isEmpty()).toBe(true);
   })
 });
+
+
+
