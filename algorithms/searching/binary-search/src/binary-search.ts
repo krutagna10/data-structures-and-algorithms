@@ -3,6 +3,8 @@
  * @param {number[]} nums - Sorted array of integers
  * @param {number} target - The target number
  * @returns {number} - The index of target element if it is present, -1 otherwise
+ * @time O(logn)
+ * @space O(1)
  */
 function binarySearch(nums: number[], target: number): number {
   let l = 0;
