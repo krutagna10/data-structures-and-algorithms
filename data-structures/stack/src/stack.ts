@@ -35,9 +35,8 @@ class Stack<T> extends SinglyLinkedList<T> {
     if (super.isEmpty()) {
       throw new Error("Stack Empty");
     }
-    return this.head.value;
+    return this.head.val;
   }
 }
-
 
 export default Stack;

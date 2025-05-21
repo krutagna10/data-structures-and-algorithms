@@ -35,7 +35,7 @@ class Queue<T> extends SinglyLinkedList<T> {
     if (super.isEmpty()) {
       throw new Error("Queue Empty");
     }
-    return this.head.value;
+    return this.head.val;
   }
 }
 

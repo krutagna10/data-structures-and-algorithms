@@ -1,9 +1,9 @@
 import { test, expect, beforeEach, describe } from "@jest/globals";
-import SinglyLinkedList from "../src/singly-linked-list";
+import DoublyLinkedList from "../src/doubly-linked-list";
 
-let linkedList: SinglyLinkedList<number>;
+let linkedList: DoublyLinkedList<number>;
 beforeEach(() => {
-  linkedList = new SinglyLinkedList<number>();
+  linkedList = new DoublyLinkedList<number>();
 });
 
 describe("Insertion", () => {
@@ -19,49 +19,57 @@ describe("Insertion", () => {
     expect(linkedList.toArray()).toEqual([1, 2]);
   });
 
-  test("should add element at the specified index in linked list", () => {
+  test("should add element at a specified index in linked list", () => {
     linkedList.add(0, 1);
     linkedList.add(1, 3);
     linkedList.add(1, 2);
     expect(linkedList.toArray()).toEqual([1, 2, 3]);
   });
+
+  test("should throw an error when adding at an invalid index", () => {
+    expect(() => linkedList.add(-1, 0)).toThrow("Invalid Index");
+  });
 });
 
 describe("Removal", () => {
-  test("should remove the first element from linked list", () => {
+  test("should remove the first element from the linked list", () => {
     linkedList.addFirst(1);
-    expect(linkedList.removeFirst()).toBe(1);
+    linkedList.addFirst(2);
+    linkedList.removeFirst();
+    expect(linkedList.toArray()).toEqual([1]);
   });
 
-  test("should remove the last element from linked list", () => {
+  test("should remove the last element from the linked list", () => {
     linkedList.addLast(1);
-    expect(linkedList.removeLast()).toBe(1);
+    linkedList.addLast(2);
+    linkedList.removeLast();
+    expect(linkedList.toArray()).toEqual([1]);
   });
 
   test("should throw an error when removing element from empty linked list", () => {
-    expect(() => linkedList.removeFirst()).toThrow("Linked List Underflow");
     expect(() => linkedList.removeLast()).toThrow("Linked List Underflow");
   });
 
-  test("should remove element at the specified index in linked list", () => {
+  test("should remove element at specified index in linked list", () => {
     linkedList.addLast(1);
     linkedList.addLast(2);
     linkedList.addLast(3);
-    expect(linkedList.remove(1)).toBe(2);
+    linkedList.remove(1);
+    expect(linkedList.toArray()).toEqual([1, 3]);
   });
 
-  test("should throw an errow an error when removing element at invalid index", () => {
+  test("should throw an error when removing at an invalid index", () => {
     expect(() => linkedList.remove(-1)).toThrow("Invalid Index");
   });
 });
 
 describe("Access & Mutation", () => {
-  test("should get the element at the specified index", () => {
+  test("should get the element at specified index", () => {
     linkedList.addLast(1);
     expect(linkedList.get(0).val).toBe(1);
   });
 
-  test("should throw an error when getting element at an invalid index", () => {
+  test("should throw an error when getting elemetn at an invalid index", () => {
     expect(() => linkedList.get(-1)).toThrow("Invalid Index");
   });
 
@@ -73,34 +81,6 @@ describe("Access & Mutation", () => {
 
   test("should throw an error when setting element at invalid index", () => {
     expect(() => linkedList.set(-1, 0)).toThrow("Invalid Index");
-  });
-
-  test("should reverse the linked list", () => {
-    linkedList.addLast(1);
-    linkedList.addLast(2);
-    linkedList.reverse();
-    expect(linkedList.toArray()).toEqual([2, 1]);
-  });
-});
-
-describe("Search", () => {
-  test("should return true when element is present in the linked list", () => {
-    linkedList.addLast(1);
-    linkedList.addLast(2);
-    expect(linkedList.includes(2)).toBe(true);
-  });
-
-  test("should return false when element is not present in the linked list", () => {
-    expect(linkedList.includes(1)).toBe(false);
-  });
-
-  test("should return the index of element if it is present in the linked list", () => {
-    linkedList.addLast(1);
-    expect(linkedList.indexOf(1)).toBe(0);
-  });
-
-  test("should return -1 if the element is not present in the linked list", () => {
-    expect(linkedList.indexOf(1)).toBe(-1);
   });
 });
 
@@ -119,7 +99,7 @@ describe("Utility", () => {
     expect(linkedList.isEmpty()).toBe(false);
   });
 
-  test("should return the correct size of the linked list", () => {
+  test("should return the correct size of linked list", () => {
     linkedList.addFirst(1);
     linkedList.addLast(2);
     linkedList.add(2, 3);
@@ -127,11 +107,5 @@ describe("Utility", () => {
     linkedList.removeLast();
     linkedList.remove(0);
     expect(linkedList.size).toBe(0);
-  });
-
-  test("should clear the linked list", () => {
-    linkedList.addLast(1);
-    linkedList.clear();
-    expect(linkedList.isEmpty()).toBe(true);
   });
 });

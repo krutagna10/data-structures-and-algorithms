@@ -1,11 +1,4 @@
-/**
- * Sorts the array in ascending order
- * @param {number[]} nums - Array of integers
- * @returns {void}
- * @time O(n^2)
- * @space O(1)
- */
-function selectionSort(nums: number[]): void {
+function selectionSort(nums: number[]): number[] {
   for (let i = 0; i < nums.length - 1; i++) {
     let minIndex = i;
     for (let j = i + 1; j < nums.length; j++) {
@@ -17,6 +10,7 @@ function selectionSort(nums: number[]): void {
       [nums[i], nums[minIndex]] = [nums[minIndex], nums[i]];
     }
   }
+  return nums;
 }
 
 export default selectionSort;
