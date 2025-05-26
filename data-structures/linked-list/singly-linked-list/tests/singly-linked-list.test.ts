@@ -3,7 +3,7 @@ import SinglyLinkedList from "../src/singly-linked-list";
 
 let linkedList: SinglyLinkedList<number>;
 beforeEach(() => {
-  linkedList = new SinglyLinkedList<number>();
+  linkedList = new SinglyLinkedList();
 });
 
 describe("Insertion", () => {

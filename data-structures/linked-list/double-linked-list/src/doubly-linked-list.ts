@@ -1,30 +1,12 @@
-/**
- * Class representing a node
- * @template {T} - The type of value stored in the nodek
- */
-class Node<T> {
-  val: T;
-  prev: Node<T> | null;
-  next: Node<T> | null;
-
-  /**
-   * Creates a node instance
-   * @param {T} val - The value to be stored in the node
-   */
-  constructor(val: T) {
-    this.val = val;
-    this.prev = null;
-    this.next = null;
-  }
-}
+import ListNode from "./list-node";
 
 /**
  * Class representing a doubly linked list
  * @template {T} - The type of value stored in the linked list
  */
 class DoublyLinkedList<T> {
-  head: Node<T> | null;
-  tail: Node<T> | null;
+  head: ListNode<T> | null;
+  tail: ListNode<T> | null;
   size: number;
 
   /**
@@ -42,7 +24,7 @@ class DoublyLinkedList<T> {
    * @returns {void}
    */
   addFirst(val: T): void {
-    const next = new Node(val);
+    const next = new ListNode(val);
     if (this.isEmpty()) {
       this.head = next;
       this.tail = next;
@@ -60,7 +42,7 @@ class DoublyLinkedList<T> {
    * @returns {void}
    */
   addLast(val: T): void {
-    const next = new Node(val);
+    const next = new ListNode(val);
     if (this.isEmpty()) {
       this.head = next;
       this.tail = next;
@@ -87,7 +69,7 @@ class DoublyLinkedList<T> {
     } else if (index === this.size) {
       this.addLast(val);
     } else {
-      const next = new Node(val);
+      const next = new ListNode(val);
       const prev = this.get(index - 1);
       next.prev = prev;
       next.next = prev.next;
@@ -151,10 +133,9 @@ class DoublyLinkedList<T> {
     } else if (index === this.size - 1) {
       return this.removeLast();
     } else {
-      const prev = this.get(index - 1);
-      const removed = prev.next;
-      prev.next = prev.next.next;
-      prev.next.prev = prev;
+      const removed = this.get(index);
+      removed.prev.next = removed.next;
+      removed.next.prev = removed.prev;
       removed.prev = null;
       removed.next = null;
       this.size--;
@@ -166,9 +147,9 @@ class DoublyLinkedList<T> {
    * Gets the node at the specified index
    * @param {number} index - The index of node which will be returned
    * @throws {Error} - An error when the index is invalid
-   * @returns {Node<T>} - The node at the index
+   * @returns {ListNode<T>} - The node at the index
    */
-  get(index: number): Node<T> {
+  get(index: number): ListNode<T> {
     if (index < 0 || index > this.size - 1) throw new Error("Invalid Index");
     let curr;
     if (index < this.size / 2) {
@@ -218,12 +199,5 @@ class DoublyLinkedList<T> {
     return this.size === 0;
   }
 }
-
-const list = new DoublyLinkedList();
-list.addLast(1);
-list.addLast(2);
-list.addLast(3);
-list.remove(1);
-console.log(list);
 
 export default DoublyLinkedList;

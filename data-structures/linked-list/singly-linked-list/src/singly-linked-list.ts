@@ -1,28 +1,12 @@
-/**
- * Class representing a node
- * @template {T} - The type of value stored in the node
- */
-class Node<T> {
-  val: T;
-  next: Node<T> | null;
-
-  /**
-   * Creates a node instance
-   * @param {T} val - The value to be stored in the node
-   */
-  constructor(val: T) {
-    this.val = val;
-    this.next = null;
-  }
-}
+import ListNode from "./list-node";
 
 /**
  * Class representing a singly linked list
  * @template {T} - The type of value stored in the linked list
  */
 class SinglyLinkedList<T> {
-  head: Node<T> | null;
-  tail: Node<T> | null;
+  head: ListNode<T> | null;
+  tail: ListNode<T> | null;
   size: number;
 
   /**
@@ -40,7 +24,7 @@ class SinglyLinkedList<T> {
    * @returns {void}
    */
   addFirst(val: T): void {
-    const next = new Node(val);
+    const next = new ListNode(val);
     if (this.isEmpty()) {
       this.head = next;
       this.tail = next;
@@ -57,7 +41,7 @@ class SinglyLinkedList<T> {
    * @returns {void}
    */
   addLast(val: T): void {
-    const next = new Node(val);
+    const next = new ListNode(val);
     if (this.isEmpty()) {
       this.head = next;
       this.tail = next;
@@ -84,7 +68,7 @@ class SinglyLinkedList<T> {
       this.addLast(val);
     } else {
       const prev = this.get(index - 1);
-      const next = new Node(val);
+      const next = new ListNode(val);
       next.next = prev.next;
       prev.next = next;
       this.size++;
@@ -116,7 +100,7 @@ class SinglyLinkedList<T> {
    */
   removeLast(): T {
     if (this.isEmpty()) throw new Error("Linked List Underflow");
-    let removed = this.tail
+    let removed = this.tail;
     if (this.size === 1) {
       this.head = null;
       this.tail = null;
@@ -160,9 +144,9 @@ class SinglyLinkedList<T> {
    * Gets the node at the specified index
    * @param {number} index - The index of node which will be returned
    * @throws {Error} - An error when the index is invalid
-   * @returns {Node<T>} - The node at the index
+   * @returns {ListNode<T>} - The node at the index
    */
-  get(index: number): Node<T> {
+  get(index: number): ListNode<T> {
     if (index < 0 || index > this.size - 1) throw new Error("Invalid Index");
     let curr = this.head;
     for (let i = 0; i < index; i++) {
