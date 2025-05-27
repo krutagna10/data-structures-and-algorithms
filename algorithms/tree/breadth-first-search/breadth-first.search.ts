@@ -1,5 +1,5 @@
-import TreeNode from "../../../../data-structures/tree/binary-tree/src/tree-node";
-import Queue from "../../../../data-structures/queue/linear-queue/src/linear-queue";
+import TreeNode from "../../../data-structures/tree/binary-tree/src/tree-node";
+import Queue from "../../../data-structures/queue/linear-queue/src/linear-queue";
 
 function breadthFirstSearch<T>(root: TreeNode<T> | null): T[] {
   if (root === null) return [];

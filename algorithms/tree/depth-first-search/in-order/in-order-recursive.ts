@@ -1,4 +1,4 @@
-import TreeNode from "../../../../../data-structures/tree/binary-tree/src/tree-node";
+import TreeNode from "../../../../data-structures/tree/binary-tree/src/tree-node";
 
 /**
  * @template T - The type of value stored in the tree node
