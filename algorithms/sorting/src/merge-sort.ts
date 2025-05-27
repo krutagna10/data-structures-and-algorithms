@@ -1,3 +1,9 @@
+/**
+ * Sorts the array in ascending order
+ * @param {number[]} nums - Array of integers
+ * @returns - The sorted array in ascending order
+ */
+
 function mergeSort(nums: number[]): number[] {
   if (nums.length <= 1) return nums;
   const mid = Math.floor(nums.length / 2);

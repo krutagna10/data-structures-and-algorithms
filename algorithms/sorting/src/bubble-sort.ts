@@ -1,3 +1,8 @@
+/**
+ * Sorts the array in ascending order
+ * @param {number[]} nums - Array of integers
+ * @returns - The sorted array in ascending order
+ */
 function bubbleSort(nums: number[]): number[] {
   for (let i = 0; i < nums.length - 1; i++) {
     let isSorted = true;
