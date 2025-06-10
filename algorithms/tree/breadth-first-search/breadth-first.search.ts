@@ -1,5 +1,5 @@
 import TreeNode from "../../../data-structures/tree/binary-tree/src/tree-node";
-import Queue from "../../../data-structures/queue/linear-queue/src/linear-queue";
+import Queue from "../../../data-structures/queue/linear-queue/linear-queue";
 
 /**
  * @template T - The type of value stored in the tree node

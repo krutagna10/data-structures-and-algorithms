@@ -1,4 +1,4 @@
-import TreeNode from "../../../../../../data-structures/tree/binary-tree/src/tree-node";
+import TreeNode from "../../../../data-structures/tree/binary-tree/src/tree-node";
 
 /**
  * @template T - The type of value stored in the tree node
@@ -7,13 +7,13 @@ import TreeNode from "../../../../../../data-structures/tree/binary-tree/src/tre
  */
 function preorder<T>(root: TreeNode<T> | null): T[] {
   const values: T[] = [];
-  const preorderRecursive = (node: TreeNode<T>) => {
+  const _preorder = (node: TreeNode<T>) => {
     if (node === null) return;
     values.push(node.val);
-    preorderRecursive(node.left);
-    preorderRecursive(node.right);
+    _preorder(node.left);
+    _preorder(node.right);
   };
-  preorderRecursive(root);
+  _preorder(root);
   return values;
 }
 

@@ -1,5 +1,5 @@
 import TreeNode from "../../../../data-structures/tree/binary-tree/src/tree-node";
-import Stack from "../../../../data-structures/stack/src/stack";
+import Stack from "../../../../data-structures/stack/stack";
 
 /**
  * @template T - The type of value stored in the tree node

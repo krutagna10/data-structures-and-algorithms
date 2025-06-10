@@ -1,5 +1,5 @@
 import TreeNode from "../../../../data-structures/tree/binary-tree/src/tree-node";
-import Stack from "../../../../data-structures/stack/src/stack";
+import Stack from "../../../../data-structures/stack/stack";
 
 /**
  * @template T - The type of value stored in the tree node
@@ -8,13 +8,13 @@ import Stack from "../../../../data-structures/stack/src/stack";
  */
 function postorder<T>(root: TreeNode<T> | null): T[] {
   const values: T[] = [];
-  const postorderRecursive = (node: TreeNode<T> | null): void => {
+  const _postorder = (node: TreeNode<T> | null): void => {
     if (node === null) return;
-    postorderRecursive(node.left);
-    postorderRecursive(node.right);
+    _postorder(node.left);
+    _postorder(node.right);
     values.push(node.val);
   };
-  postorderRecursive(root);
+  _postorder(root);
   return values;
 }
 

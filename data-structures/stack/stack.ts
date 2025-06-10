@@ -1,4 +1,4 @@
-import SinglyLinkedList from "../../linked-list/singly-linked-list/src/singly-linked-list";
+import SinglyLinkedList from "../linked-list/singly-linked-list/src/singly-linked-list";
 
 /**
  * Class representing a stack
