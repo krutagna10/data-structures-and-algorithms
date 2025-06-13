@@ -1,12 +1,12 @@
 /**
- * Class representing a max heap
+ * Class representing a min heap
  * @template {T} - The type of value stored in the heap
  */
-class MaxHeap<T> {
+class MinHeap<T> {
   values: T[];
 
   /**
-   * Creates a singly linked list instance
+   * Creates a min heap instance
    */
   constructor() {
     this.values = [];
@@ -17,7 +17,7 @@ class MaxHeap<T> {
    * @param {number} childIndex - The child index
    * @returns {number} - The parent index
    */
-  getParent(childIndex: number): number {
+  getParentIndex(childIndex: number): number {
     return Math.floor((childIndex - 1) / 2);
   }
 
@@ -53,20 +53,21 @@ class MaxHeap<T> {
   }
 
   /**
-   * Inserts a new value into the heap
+   * Adds a new value into the heap
    * @param {T} value - The value to be added to the heap
    * @returns {void}
    */
-  insert(value: T): void {
+  add(value: T): void {
     this.values.push(value);
     this.heapifyUp();
   }
 
   /**
-   * Deletes the maximum value from heap
+   * Removes the maximum value from heap
    * @throws {Error} - An error when the heap is empty
+   * @returns {T} - The maximum value from the heap
    */
-  delete(): T {
+  remove(): T {
     if (this.values.length === 0) {
       throw new Error("Heap Underflow");
     }
@@ -74,48 +75,81 @@ class MaxHeap<T> {
       return this.values.pop();
     }
 
-    const maxValue = this.values[0];
+    const minValue = this.values[0];
     this.values[0] = this.values.pop();
     this.heapifyDown();
-    return maxValue;
+    return minValue;
   }
 
-  heapifyUp() {
+  /**
+   * Retrieves the minumum value from the heap
+   * @throws {Error} - An error when the heap is empty
+   * @returns {T} - The minumum value from the heap
+   */
+  peek(): T {
+    if (this.values.length === 0) {
+      throw new Error("Heap is Empty");
+    }
+    return this.values[0];
+  }
+
+  /**
+   * Maintains the heap property by moving the last inserted element up
+   * @returns {void}
+   */
+  heapifyUp(): void {
     let childIndex = this.values.length - 1;
     while (
       childIndex > 0 &&
-      this.values[childIndex] > this.values[this.getParent(childIndex)]
+      this.values[childIndex] < this.values[this.getParentIndex(childIndex)]
     ) {
-      const parentIndex = this.getParent(childIndex);
+      const parentIndex = this.getParentIndex(childIndex);
       this.swap(childIndex, parentIndex);
       childIndex = parentIndex;
     }
   }
 
+  /**
+   * Maintains the heap property by moving the root element down
+   * @returns {void}
+   */
   heapifyDown(): void {
     let parentIndex = 0;
     while (this.getLeftChildIndex(parentIndex) < this.values.length) {
-      let leftChildIndex = this.getLeftChildIndex(parentIndex);
+      let smallerChildIndex = this.getLeftChildIndex(parentIndex);
       let rightChildIndex = this.getRightChildIndex(parentIndex);
+
       if (
-        this.values[parentIndex] >= this.values[leftChildIndex] &&
-        this.values[parentIndex] >= this.values[rightChildIndex]
+        rightChildIndex < this.values.length &&
+        this.values[rightChildIndex] < this.values[smallerChildIndex]
       ) {
+        smallerChildIndex = rightChildIndex;
+      }
+
+      if (this.values[parentIndex] <= this.values[smallerChildIndex]) {
         break;
       }
 
-      let largerChildIndex = leftChildIndex;
-      if (
-        rightChildIndex < this.values.length &&
-        this.values[rightChildIndex] > this.values[largerChildIndex]
-      ) {
-        largerChildIndex = rightChildIndex;
-      }
-      this.swap(parentIndex, largerChildIndex);
-      parentIndex = largerChildIndex;
+      this.swap(parentIndex, smallerChildIndex);
+      parentIndex = smallerChildIndex;
     }
+  }
+
+  /**
+   * Returns the size of the heap
+   * @returns {number} - The size of the heap
+   */
+  size(): number {
+    return this.values.length;
+  }
+
+  /**
+   * Checks whether the heap is empty
+   * @returns {boolean} - `true` if heap if empty, `false` otherwise
+   */
+  isEmpty(): boolean {
+    return this.values.length === 0;
   }
 }
 
-
-export default MaxHeap;
+export default MinHeap;
