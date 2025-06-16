@@ -1,15 +1,20 @@
+import Comparator from "../../../utils/comparator/comparator";
+
 /**
  * Class representing a min heap
  * @template {T} - The type of value stored in the heap
  */
 class MinHeap<T> {
   values: T[];
+  comparator: Comparator<T>;
 
   /**
    * Creates a min heap instance
+   * @param {function(T, T):number} compareFunction - Optional custom comparator function
    */
-  constructor() {
+  constructor(compareFunction?: (a: T, b: T) => number) {
     this.values = [];
+    this.comparator = new Comparator(compareFunction);
   }
 
   /**
@@ -31,7 +36,7 @@ class MinHeap<T> {
   }
 
   /**
-   * Calculaates the right child index
+   * Calculates the right child index
    * @param {number} parentIndex - The parent index
    * @returns {number} - The right child index
    */
@@ -63,9 +68,9 @@ class MinHeap<T> {
   }
 
   /**
-   * Removes the maximum value from heap
+   * Removes the minimum value from heap
    * @throws {Error} - An error when the heap is empty
-   * @returns {T} - The maximum value from the heap
+   * @returns {T} - The minimum value from the heap
    */
   remove(): T {
     if (this.values.length === 0) {
@@ -82,9 +87,9 @@ class MinHeap<T> {
   }
 
   /**
-   * Retrieves the minumum value from the heap
+   * Retrieves the minimum value from the heap
    * @throws {Error} - An error when the heap is empty
-   * @returns {T} - The minumum value from the heap
+   * @returns {T} - The minimum value from the heap
    */
   peek(): T {
     if (this.values.length === 0) {
@@ -101,7 +106,10 @@ class MinHeap<T> {
     let childIndex = this.values.length - 1;
     while (
       childIndex > 0 &&
-      this.values[childIndex] < this.values[this.getParentIndex(childIndex)]
+      this.comparator.lessThan(
+        this.values[childIndex],
+        this.values[this.getParentIndex(childIndex)]
+      )
     ) {
       const parentIndex = this.getParentIndex(childIndex);
       this.swap(childIndex, parentIndex);
@@ -110,29 +118,57 @@ class MinHeap<T> {
   }
 
   /**
-   * Maintains the heap property by moving the root element down
+   * Restores the heap property by moving the element at the given index down
+   * @param {number} parentIndex - The index from which heapify down will start
    * @returns {void}
    */
-  heapifyDown(): void {
-    let parentIndex = 0;
+  heapifyDown(parentIndex: number = 0): void {
     while (this.getLeftChildIndex(parentIndex) < this.values.length) {
       let smallerChildIndex = this.getLeftChildIndex(parentIndex);
       let rightChildIndex = this.getRightChildIndex(parentIndex);
 
       if (
         rightChildIndex < this.values.length &&
-        this.values[rightChildIndex] < this.values[smallerChildIndex]
+        this.comparator.lessThan(
+          this.values[rightChildIndex],
+          this.values[smallerChildIndex]
+        )
       ) {
         smallerChildIndex = rightChildIndex;
       }
 
-      if (this.values[parentIndex] <= this.values[smallerChildIndex]) {
+      if (
+        this.comparator.lessThanOrEqual(
+          this.values[parentIndex],
+          this.values[smallerChildIndex]
+        )
+      ) {
         break;
       }
 
       this.swap(parentIndex, smallerChildIndex);
       parentIndex = smallerChildIndex;
     }
+  }
+
+  /**
+   * Builds a heap from an array
+   * @param {T[]} values - The input array
+   * @returns {void}
+   */
+  fromArray(values: T[]): void {
+    this.values = values;
+    for (let i = Math.floor(this.values.length / 2) - 1; i >= 0; i--) {
+      this.heapifyDown(i);
+    }
+  }
+
+  /**
+   * Returns an array consisting of heap values
+   * @returns {T[]} - An array consisting of heap values
+   */
+  toArray(): T[] {
+    return this.values;
   }
 
   /**

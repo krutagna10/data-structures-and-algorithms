@@ -1,17 +1,20 @@
+import Comparator from "../../../utils/comparator/comparator";
+
 /**
  * Class representing a max heap
  * @template {T} - The type of value stored in the heap
  */
 class MaxHeap<T> {
   values: T[];
-  comparator: (a: T, b: T) => number;
+  comparator: Comparator<T>;
 
   /**
    * Creates a max heap instance
+   * @param {function(T, T):number} compareFunction - Optional custom comparator function
    */
-  constructor(comparator?: (a: T, b: T) => number) {
+  constructor(compareFunction?: (a: T, b: T) => number) {
     this.values = [];
-    this.comparator = comparator ?? ((a, b) => (a > b ? 1 : a < b ? -1 : 0));
+    this.comparator = new Comparator(compareFunction);
   }
 
   /**
@@ -33,7 +36,7 @@ class MaxHeap<T> {
   }
 
   /**
-   * Calculaates the right child index
+   * Calculates the right child index
    * @param {number} parentIndex - The parent index
    * @returns {number} - The right child index
    */
@@ -103,10 +106,10 @@ class MaxHeap<T> {
     let childIndex = this.values.length - 1;
     while (
       childIndex > 0 &&
-      this.comparator(
+      this.comparator.greaterThan(
         this.values[childIndex],
         this.values[this.getParentIndex(childIndex)]
-      ) > 0
+      )
     ) {
       const parentIndex = this.getParentIndex(childIndex);
       this.swap(childIndex, parentIndex);
@@ -116,7 +119,7 @@ class MaxHeap<T> {
 
   /**
    * Restores the heap property by moving the element at the given index down
-   * @param {number} parentIndex - The index from which to start heapify down
+   * @param {number} parentIndex - The index from which heapify down will start
    * @returns {void}
    */
   heapifyDown(parentIndex: number = 0): void {
@@ -126,19 +129,19 @@ class MaxHeap<T> {
 
       if (
         rightChildIndex < this.values.length &&
-        this.comparator(
+        this.comparator.greaterThan(
           this.values[rightChildIndex],
           this.values[largerChildIndex]
-        ) > 0
+        )
       ) {
         largerChildIndex = rightChildIndex;
       }
 
       if (
-        this.comparator(
+        this.comparator.greaterThanOrEqual(
           this.values[parentIndex],
           this.values[largerChildIndex]
-        ) >= 0
+        )
       ) {
         break;
       }

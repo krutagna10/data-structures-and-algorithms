@@ -5,17 +5,10 @@
 class Comparator<T> {
   compare: (a: T, b: T) => number;
   /**
-   * @callback CompareFunction
-   * @param {T} a - The first value to be compared
-   * @param {T} b - The second value to be compared
-   * @returns {number} - A positive number if a > b, negative number if a < b, or 0 if equal
-   */
-
-  /**
    * Creates a comparator instance
-   * @param {CompareFunction} compareFunction - Optional custom comparator function
+   * @param {function(T, T):number} compareFunction - Optional custom comparator function
    */
-  constructor(compareFunction?: (a: T, b: T) => number) {
+  constructor(compareFunction: (a: T, b: T) => number) {
     this.compare = compareFunction || Comparator.defaultCompareFunction;
   }
 
@@ -82,8 +75,5 @@ class Comparator<T> {
     return this.greaterThan(a, b) || this.equal(a, b);
   }
 }
-
-const comparator = new Comparator;
-console.log(comparator.equal(1, 2));
 
 export default Comparator;
