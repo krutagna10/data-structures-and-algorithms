@@ -62,7 +62,7 @@ class MinHeap<T> {
    * @param {T} value - The value to be added to the heap
    * @returns {void}
    */
-  add(value: T): void {
+  push(value: T): void {
     this.values.push(value);
     this.heapifyUp();
   }
@@ -72,7 +72,7 @@ class MinHeap<T> {
    * @throws {Error} - An error when the heap is empty
    * @returns {T} - The minimum value from the heap
    */
-  remove(): T {
+  pop(): T {
     if (this.values.length === 0) {
       throw new Error("Heap Underflow");
     }
