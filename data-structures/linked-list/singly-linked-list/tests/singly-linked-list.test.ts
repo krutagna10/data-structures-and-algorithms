@@ -30,28 +30,28 @@ describe("Insertion", () => {
 describe("Removal", () => {
   test("should remove the first element from linked list", () => {
     linkedList.addFirst(1);
-    expect(linkedList.removeFirst()).toBe(1);
+    expect(linkedList.deleteFirst()).toBe(1);
   });
 
   test("should remove the last element from linked list", () => {
     linkedList.addLast(1);
-    expect(linkedList.removeLast()).toBe(1);
+    expect(linkedList.deleteLast()).toBe(1);
   });
 
   test("should throw an error when removing element from empty linked list", () => {
-    expect(() => linkedList.removeFirst()).toThrow("Linked List Underflow");
-    expect(() => linkedList.removeLast()).toThrow("Linked List Underflow");
+    expect(() => linkedList.deleteFirst()).toThrow("Linked List Underflow");
+    expect(() => linkedList.deleteLast()).toThrow("Linked List Underflow");
   });
 
   test("should remove element at the specified index in linked list", () => {
     linkedList.addLast(1);
     linkedList.addLast(2);
     linkedList.addLast(3);
-    expect(linkedList.remove(1)).toBe(2);
+    expect(linkedList.delete(1)).toBe(2);
   });
 
   test("should throw an errow an error when removing element at invalid index", () => {
-    expect(() => linkedList.remove(-1)).toThrow("Invalid Index");
+    expect(() => linkedList.delete(-1)).toThrow("Invalid Index");
   });
 });
 
@@ -123,9 +123,9 @@ describe("Utility", () => {
     linkedList.addFirst(1);
     linkedList.addLast(2);
     linkedList.add(2, 3);
-    linkedList.removeFirst();
-    linkedList.removeLast();
-    linkedList.remove(0);
+    linkedList.deleteFirst();
+    linkedList.deleteLast();
+    linkedList.delete(0);
     expect(linkedList.size).toBe(0);
   });
 

@@ -23,7 +23,7 @@ class Stack<T> extends SinglyLinkedList<T> {
     if (super.isEmpty()) {
       throw new Error("Stack Underflow");
     }
-    return super.removeFirst();
+    return super.deleteFirst();
   }
 
   /**

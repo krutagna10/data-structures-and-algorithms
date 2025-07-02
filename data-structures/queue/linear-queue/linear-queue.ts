@@ -23,7 +23,7 @@ class Queue<T> extends SinglyLinkedList<T> {
     if (super.isEmpty()) {
       throw new Error("Queue Underflow");
     }
-    return super.removeFirst();
+    return super.deleteFirst();
   }
 
   /**

@@ -80,7 +80,7 @@ class SinglyLinkedList<T> {
    * @throws {Error} - An error when the linked list is empty
    * @returns {T} - The removed element;
    */
-  removeFirst(): T {
+  deleteFirst(): T {
     if (this.isEmpty()) throw new Error("Linked List Underflow");
     let removed = this.head;
     if (this.size === 1) {
@@ -98,7 +98,7 @@ class SinglyLinkedList<T> {
    * @throws {Error} - An error when the linked list is empty
    * @returns {T} - The removed element
    */
-  removeLast(): T {
+  deleteLast(): T {
     if (this.isEmpty()) throw new Error("Linked List Underflow");
     let removed = this.tail;
     if (this.size === 1) {
@@ -124,13 +124,13 @@ class SinglyLinkedList<T> {
    * @throws {Error} - An error when the index is invalid
    * @returns {T} - The removed element
    */
-  remove(index: number): T {
+  delete(index: number): T {
     if (index < 0 || index > this.size - 1) {
       throw new Error("Invalid Index");
     } else if (index === 0) {
-      return this.removeFirst();
+      return this.deleteFirst();
     } else if (index === this.size - 1) {
-      return this.removeLast();
+      return this.deleteLast();
     } else {
       const prev = this.get(index - 1);
       const removed = prev.next;
