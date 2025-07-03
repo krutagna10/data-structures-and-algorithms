@@ -1,4 +1,4 @@
-import ListNode from "./list-node";
+import ListNode from "./doubly-list-node";
 
 /**
  * Class representing a doubly linked list

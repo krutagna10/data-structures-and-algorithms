@@ -1,4 +1,4 @@
-import ListNode from "./list-node";
+import ListNode from "./singly-list-node";
 
 /**
  * Class representing a singly linked list
