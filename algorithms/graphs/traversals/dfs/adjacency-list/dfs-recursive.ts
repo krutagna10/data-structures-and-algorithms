@@ -1,3 +1,9 @@
+/**
+ * Performs a dfs traversal on graph starting from a given node
+ * @param {Record<string, string[]>} adjacencyList - The graph represented as an adjacency list
+ * @param {string} start - The starting node for dfs traversal
+ */
+
 function dfs(adjacencyList: Record<string, string[]>, start: string): void {
   const visitedVertex: Record<string, boolean> = {};
 
@@ -14,3 +20,5 @@ function dfs(adjacencyList: Record<string, string[]>, start: string): void {
 
   _dfs(start);
 }
+
+export default dfs;

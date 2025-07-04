@@ -1,4 +1,4 @@
-import TrieNode from "./trie-node";
+import TrieNode from "@/data-structures/trie/trie-node";
 
 /**
  * Class representing a trie

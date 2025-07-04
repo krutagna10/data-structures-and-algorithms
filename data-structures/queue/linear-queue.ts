@@ -1,4 +1,4 @@
-import SinglyLinkedList from "../../linked-list/singly-linked-list/singly-linked-list";
+import SinglyLinkedList from "@/data-structures/linked-list/singly-linked-list/singly-linked-list";
 
 /**
  * Class representing a queue

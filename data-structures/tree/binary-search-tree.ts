@@ -1,4 +1,4 @@
-import TreeNode from "../binary-tree/src/tree-node";
+import TreeNode from "./tree-node";
 
 /**
  * Class representing a binary search tree

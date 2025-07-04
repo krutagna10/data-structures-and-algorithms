@@ -1,4 +1,4 @@
-import ListNode from "./singly-list-node";
+import ListNode from "@/data-structures/linked-list/singly-linked-list/list-node";
 
 /**
  * Class representing a singly linked list

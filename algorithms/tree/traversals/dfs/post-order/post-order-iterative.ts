@@ -1,7 +1,8 @@
-import TreeNode from "../../../../data-structures/tree/binary-tree/src/tree-node";
-import Stack from "../../../../data-structures/stack/src/stack";
+import TreeNode from "@/data-structures/tree/tree-node";
+import Stack from "@/data-structures/stack/stack";
 
 /**
+ * Performs a postorder traversal on a tree
  * @template T - The type of value stored in the tree node
  * @param {TreeNode<T> | null} root - The root of the binary tree
  * @returns {T[]} - An array of values in postorder traversal order

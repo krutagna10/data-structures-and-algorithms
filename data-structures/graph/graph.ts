@@ -32,4 +32,14 @@ class Graph {
   }
 }
 
+const graph = new Graph();
+graph.addVertex("a");
+graph.addVertex("b");
+graph.addVertex("c");
+graph.addVertex("d");
+graph.addEdge("a", "b");
+graph.addEdge("a", "d");
+graph.addEdge("c", "b");
+graph.addEdge("c", "d");
+
 export default Graph;

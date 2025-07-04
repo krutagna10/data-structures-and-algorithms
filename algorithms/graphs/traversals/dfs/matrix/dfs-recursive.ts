@@ -1,3 +1,8 @@
+/**
+ * Performs a dfs traversal on a graph
+ * @param {string[][]} matrix - A 2D matrix representing the graph
+ * @returns {void}
+ */
 function dfs(matrix: string[][]): void {
   const rows = matrix.length;
   const cols = matrix[0].length;
@@ -34,3 +39,5 @@ function dfs(matrix: string[][]): void {
     }
   }
 }
+
+export default dfs;

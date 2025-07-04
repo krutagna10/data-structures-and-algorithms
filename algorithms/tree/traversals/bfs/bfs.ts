@@ -1,12 +1,13 @@
-import TreeNode from "../../../data-structures/tree/binary-tree/src/tree-node";
-import Queue from "../../../data-structures/queue/linear-queue/linear-queue";
+import TreeNode from "@/data-structures/tree/tree-node";
+import Queue from "@/data-structures/queue/linear-queue";
 
 /**
+ * Performs a bfs traversal on a tree
  * @template T - The type of value stored in the tree node
  * @param {TreeNode<T> | null} root - The root of the binary tree
  * @returns {T[][]} - An array of values in breadth first search traversal order
  */
-function breadthFirstSearch<T>(root: TreeNode<T> | null): T[][] {
+function bfs<T>(root: TreeNode<T> | null): T[][] {
   if (root === null) {
     return [];
   }
@@ -32,4 +33,4 @@ function breadthFirstSearch<T>(root: TreeNode<T> | null): T[][] {
   return values;
 }
 
-export default breadthFirstSearch;
+export default bfs;

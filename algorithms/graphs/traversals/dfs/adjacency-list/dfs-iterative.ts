@@ -1,27 +1,26 @@
-import Graph from "@/data-structures/graph/graph";
 import Stack from "@/data-structures/stack/stack";
 
+/**
+ * Performs a dfs traversal on graph starting from a given node
+ * @param {Record<string, string[]>} adjacencyList - The graph represented as an adjacency list
+ * @param {string} start - The starting node for dfs traversal
+ */
 function dfs(adjacencyList: Record<string, string[]>, start: string): void {
   const stack = new Stack<string>();
+  const visited: Record<string, boolean> = {};
   stack.push(start);
 
   while (stack.size > 0) {
     const vertex = stack.pop();
-
+    if (visited[vertex]) {
+      continue;
+    }
+    visited[vertex] = true;
+    for (const neighbour of adjacencyList[vertex]) {
+      stack.push(neighbour);
+    }
   }
 }
 
-const graph = new Graph();
-graph.addVertex("a");
-graph.addVertex("b");
-graph.addVertex("c");
-graph.addVertex("d");
-graph.addVertex("e");
-graph.addVertex("f");
-graph.addEdge("a", "b");
-graph.addEdge("a", "c");
-graph.addEdge("b", "d");
-graph.addEdge("c", "e");
-graph.addEdge("d", "e");
-graph.addEdge("d", "f");
-graph.addEdge("f", "d");
+export default dfs;
+
