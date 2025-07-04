@@ -1,6 +1,6 @@
 import { test, expect, beforeEach, describe } from "@jest/globals";
 import BinarySearchTree from "./binary-search-tree";
-import breadthFirstSearch from "../../../algorithms/tree/breadth-first-search/breadth-first.search";
+import breadthFirstSearch from "../../../algorithms/tree/bfs/bfs";
 
 let bst: BinarySearchTree<number>;
 beforeEach(() => {

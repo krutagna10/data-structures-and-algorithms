@@ -1,4 +1,4 @@
-import ListNode from "../../../data-structures/linked-list/singly-linked-list/singly-list-node";
+import ListNode from "@/data-structures/linked-list/singly-linked-list/singly-list-node";
 
 function traversal<T>(head: ListNode<T>): void {
   let curr = head;
