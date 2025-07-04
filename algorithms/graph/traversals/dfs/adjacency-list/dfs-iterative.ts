@@ -15,7 +15,9 @@ function dfs(adjacencyList: Record<string, string[]>, start: string): void {
     if (visited[vertex]) {
       continue;
     }
+
     visited[vertex] = true;
+
     for (const neighbour of adjacencyList[vertex]) {
       stack.push(neighbour);
     }

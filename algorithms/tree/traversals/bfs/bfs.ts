@@ -1,5 +1,5 @@
 import TreeNode from "@/data-structures/tree/tree-node";
-import Queue from "@/data-structures/queue/linear-queue";
+import LinearQueue from "@/data-structures/queue/linear-queue";
 
 /**
  * Performs a bfs traversal on a tree
@@ -12,7 +12,7 @@ function bfs<T>(root: TreeNode<T> | null): T[][] {
     return [];
   }
 
-  const queue = new Queue<TreeNode<T>>();
+  const queue = new LinearQueue<TreeNode<T>>();
   const values = [];
   queue.enqueue(root);
   while (queue.size > 0) {
