@@ -2,7 +2,7 @@ import TreeNode from "@/data-structures/tree/tree-node";
 
 /**
  * Performs a preorder traversal on a tree
- * @template T - The type of value stored in the tree node
+ * @template T - The type of value stored in tree node
  * @param {TreeNode<T> | null} root - The root of the binary tree
  * @returns {T[]} - An array of values in preorder traversal order
  */

@@ -1,11 +1,12 @@
-import Stack from "@/data-structures/stack/stack";
+import LinearQueue from "@/data-structures/queue/linear-queue";
 
 /**
- * Performs a dfs traversal on a graph
+ * Performs a bfs traversal on a graph
+ * @template T - The type of value stored in matrix
  * @param {string[][]} matrix - A 2D matrix representing the graph
  * @returns {void}
  */
-function dfs(matrix: string[][]): void {
+function bfs<T>(matrix: T[][]): void {
   const rows = matrix.length;
   const cols = matrix[0].length;
   const visited = Array.from({ length: rows }, () =>
@@ -18,12 +19,12 @@ function dfs(matrix: string[][]): void {
     [0, -1],
   ];
 
-  const _dfs = (row: number, col: number): void => {
-    const stack = new Stack<[number, number]>();
-    stack.push([row, col]);
+  const _bfs = (row: number, col: number): void => {
+    const queue = new LinearQueue<[number, number]>();
+    queue.enqueue([row, col]);
 
-    while (stack.size > 0) {
-      const [row, col] = stack.pop();
+    while (queue.size > 0) {
+      const [row, col] = queue.dequeue();
       if (
         row < 0 ||
         row > rows - 1 ||
@@ -34,17 +35,19 @@ function dfs(matrix: string[][]): void {
         continue;
       }
 
+      visited[row][col] = true;
+
       for (const [dx, dy] of directions) {
-        stack.push([row + dx, col + dy]);
+        queue.enqueue([row + dx, col + dy]);
       }
     }
   };
 
   for (let row = 0; row < rows; row++) {
     for (let col = 0; col < cols; col++) {
-      _dfs(row, col);
+      _bfs(row, col);
     }
   }
 }
 
-export default dfs;
+export default bfs;

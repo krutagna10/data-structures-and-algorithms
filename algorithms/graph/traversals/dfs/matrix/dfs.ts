@@ -1,5 +1,6 @@
 /**
  * Performs a dfs traversal on a graph
+ * @template T - The type of value stored in matrix
  * @param {string[][]} matrix - A 2D matrix representing the graph
  * @returns {void}
  */
@@ -28,6 +29,7 @@ function dfs(matrix: string[][]): void {
     }
 
     visited[row][col] = true;
+    
     for (const [dx, dy] of directions) {
       _dfs(row + dx, col + dy);
     }

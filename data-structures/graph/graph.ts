@@ -1,45 +1,65 @@
-class Graph {
-  adjacencyList: Record<string, string[]>;
+/**
+ * Class representing a graph
+ * @template {T} - The type of value stored in the graph
+ */
+class Graph<T> {
+  adjacencyList: Map<T, T[]>;
+
+  /**
+   * Creates a graph instance
+   */
   constructor() {
-    this.adjacencyList = {};
+    this.adjacencyList = new Map();
   }
 
-  addVertex(vertex: string): void {
-    if (!this.adjacencyList[vertex]) {
-      this.adjacencyList[vertex] = [];
-    }
+  /**
+   * Adds a vertex in the graph
+   * @param {T} vertex - The vertex to be added to graph
+   * @returns {void}
+   */
+  addVertex(vertex: T): void {
+    this.adjacencyList.set(vertex, []);
   }
 
-  deleteVertex(vertex: string): void {
-    for (const adjacentVertex of this.adjacencyList[vertex]) {
+  /**
+   * Deletes a vertex from the graph
+   * @param {T} vertex - The vertex to be deleted from the graph
+   * @returns {void}
+   */
+  deleteVertex(vertex: T): void {
+    for (const adjacentVertex of this.adjacencyList.get(vertex)) {
       this.deleteEdge(vertex, adjacentVertex);
     }
-    delete this.adjacencyList[vertex];
+    this.adjacencyList.delete(vertex);
   }
 
-  addEdge(vertex1: string, vertex2: string): void {
-    this.adjacencyList[vertex1].push(vertex2);
-    this.adjacencyList[vertex2].push(vertex1);
+  /**
+   * Adds an edge between two vertices
+   * @param {T} vertex1 - The vertex1
+   * @param {T} vertex2 - The vertex2
+   * @returns {void}
+   */
+  addEdge(vertex1: T, vertex2: T): void {
+    this.adjacencyList.get(vertex1).push(vertex2);
+    this.adjacencyList.get(vertex1).push(vertex1);
   }
 
-  deleteEdge(vertex1: string, vertex2: string): void {
-    this.adjacencyList[vertex1] = this.adjacencyList[vertex1].filter(
-      (vertex) => vertex !== vertex2
+  /**
+   * Deletes an edge between two vertices
+   * @param {T} vertex1 - The vertex1
+   * @param {T} vertex2 - The vertex2
+   * @returns {void}
+   */
+  deleteEdge(vertex1: T, vertex2: T): void {
+    this.adjacencyList.set(
+      vertex1,
+      this.adjacencyList.get(vertex1).filter((vertex) => vertex !== vertex2)
     );
-    this.adjacencyList[vertex2] = this.adjacencyList[vertex2].filter(
-      (vertex) => vertex !== vertex1
+    this.adjacencyList.set(
+      vertex2,
+      this.adjacencyList.get(vertex2).filter((vertex) => vertex !== vertex1)
     );
   }
 }
-
-const graph = new Graph();
-graph.addVertex("a");
-graph.addVertex("b");
-graph.addVertex("c");
-graph.addVertex("d");
-graph.addEdge("a", "b");
-graph.addEdge("a", "d");
-graph.addEdge("c", "b");
-graph.addEdge("c", "d");
 
 export default Graph;
