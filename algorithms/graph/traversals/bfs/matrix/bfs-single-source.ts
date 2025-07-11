@@ -1,7 +1,7 @@
 import LinearQueue from "@/data-structures/queue/linear-queue";
 
 /**
- * Performs a bfs traversal on a graph
+ * Performs a single source bfs traversal on a graph
  * @template T - The type of value stored in matrix
  * @param {string[][]} matrix - A 2D matrix representing the graph
  * @returns {void}
