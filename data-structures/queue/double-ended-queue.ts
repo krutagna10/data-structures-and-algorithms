@@ -27,7 +27,9 @@ class DoubleEndedQueue<T> {
    * @returns {void}
    */
   enqueueFront(value: T): void {
-    if (this.isFull()) throw new Error("Double Ended Queue Overflow");
+    if (this.isFull()) {
+      throw new Error("Double Ended Queue Overflow");
+    }
     if (this.isEmpty()) {
       this.front = 0;
       this.rear = 0;
@@ -46,7 +48,9 @@ class DoubleEndedQueue<T> {
    * @returns {void}
    */
   enqueueRear(value: T): void {
-    if (this.isFull()) throw new Error("Double Ended Queue Overflow");
+    if (this.isFull()) {
+      throw new Error("Double Ended Queue Overflow");
+    }
     if (this.isEmpty()) {
       this.front = 0;
       this.rear = 0;
@@ -62,7 +66,9 @@ class DoubleEndedQueue<T> {
    * @returns {void}
    */
   dequeueFront(): void {
-    if (this.isEmpty()) throw new Error("Double Ended Queue Underflow");
+    if (this.isEmpty()) {
+      throw new Error("Double Ended Queue Underflow");
+    }
     if (this.front === this.rear) {
       this.front = -1;
       this.rear = -1;
@@ -77,7 +83,9 @@ class DoubleEndedQueue<T> {
    * @returns {void}
    */
   dequeueRear(): void {
-    if (this.isEmpty()) throw new Error("Double Ended Queue Underflow");
+    if (this.isEmpty()) {
+      throw new Error("Double Ended Queue Underflow");
+    }
     if (this.front === this.rear) {
       this.front = -1;
       this.rear = -1;
@@ -94,7 +102,9 @@ class DoubleEndedQueue<T> {
    * @returns {T} - The element at the front
    */
   getFront(): T {
-    if (this.isEmpty()) throw new Error("Double Unded Queue is Empty");
+    if (this.isEmpty()) {
+      throw new Error("Double Unded Queue is Empty");
+    }
     return this.items[this.front];
   }
 
@@ -103,7 +113,9 @@ class DoubleEndedQueue<T> {
    * @returns {T} - The element at the rear
    */
   getRear(): T {
-    if (this.isEmpty()) throw new Error("Double Unded Queue is Empty");
+    if (this.isEmpty()) {
+      throw new Error("Double Unded Queue is Empty");
+    }
     return this.items[this.rear];
   }
 

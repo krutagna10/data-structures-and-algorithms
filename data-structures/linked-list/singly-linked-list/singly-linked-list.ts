@@ -62,7 +62,9 @@ class SinglyLinkedList<T> {
   add(index: number, val: T): void {
     if (index < 0 || index > this.size) {
       throw new Error("Invalid Index");
-    } else if (index === 0) {
+    }
+
+    if (index === 0) {
       this.addFirst(val);
     } else if (index === this.size) {
       this.addLast(val);
@@ -81,7 +83,10 @@ class SinglyLinkedList<T> {
    * @returns {T} - The removed element;
    */
   deleteFirst(): T {
-    if (this.isEmpty()) throw new Error("Linked List Underflow");
+    if (this.isEmpty()) {
+      throw new Error("Linked List Underflow");
+    }
+
     let removed = this.head;
     if (this.size === 1) {
       this.head = null;
@@ -99,7 +104,10 @@ class SinglyLinkedList<T> {
    * @returns {T} - The removed element
    */
   deleteLast(): T {
-    if (this.isEmpty()) throw new Error("Linked List Underflow");
+    if (this.isEmpty()) {
+      throw new Error("Linked List Underflow");
+    }
+
     let removed = this.tail;
     if (this.size === 1) {
       this.head = null;
@@ -127,7 +135,9 @@ class SinglyLinkedList<T> {
   delete(index: number): T {
     if (index < 0 || index > this.size - 1) {
       throw new Error("Invalid Index");
-    } else if (index === 0) {
+    }
+
+    if (index === 0) {
       return this.deleteFirst();
     } else if (index === this.size - 1) {
       return this.deleteLast();
@@ -147,7 +157,10 @@ class SinglyLinkedList<T> {
    * @returns {ListNode<T>} - The node at the index
    */
   get(index: number): ListNode<T> {
-    if (index < 0 || index > this.size - 1) throw new Error("Invalid Index");
+    if (index < 0 || index > this.size - 1) {
+      throw new Error("Invalid Index");
+    }
+
     let curr = this.head;
     for (let i = 0; i < index; i++) {
       curr = curr.next;
@@ -188,10 +201,15 @@ class SinglyLinkedList<T> {
    * @returns {boolean} - `true` if value exists in linked list, `false` otherwise
    */
   includes(val: T): boolean {
-    if (this.isEmpty()) return false;
+    if (this.isEmpty()) {
+      return false;
+    }
+
     let curr = this.head;
     while (curr) {
-      if (curr.val === val) return true;
+      if (curr.val === val) {
+        return true;
+      }
       curr = curr.next;
     }
     return false;
@@ -206,7 +224,9 @@ class SinglyLinkedList<T> {
     let curr = this.head;
     let index = 0;
     while (curr) {
-      if (curr.val === val) return index;
+      if (curr.val === val) {
+        return index;
+      }
       curr = curr.next;
       index++;
     }
@@ -218,7 +238,10 @@ class SinglyLinkedList<T> {
    * @returns {T[]} - An array containing all the elements in the linked list
    */
   toArray(): T[] {
-    if (this.isEmpty()) return [];
+    if (this.isEmpty()) {
+      return [];
+    }
+
     const values = [];
     let curr = this.head;
     while (curr) {

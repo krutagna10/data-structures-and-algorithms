@@ -1,15 +1,15 @@
-import Comparator from "../../../utils/comparator/comparator";
+import Comparator from "@/utils/comparator/comparator";
 
 /**
- * Class representing a max heap
+ * Class representing a min heap
  * @template {T} - The type of value stored in the heap
  */
-class MaxHeap<T> {
+class MinHeap<T> {
   values: T[];
   comparator: Comparator<T>;
 
   /**
-   * Creates a max heap instance
+   * Creates a min heap instance
    * @param {function(T, T):number} compareFunction - Optional custom comparator function
    */
   constructor(compareFunction?: (a: T, b: T) => number) {
@@ -68,9 +68,9 @@ class MaxHeap<T> {
   }
 
   /**
-   * Removes the maximum value from heap
+   * Removes the minimum value from heap
    * @throws {Error} - An error when the heap is empty
-   * @returns {T} - The maximum value from the heap
+   * @returns {T} - The minimum value from the heap
    */
   pop(): T {
     if (this.values.length === 0) {
@@ -80,16 +80,16 @@ class MaxHeap<T> {
       return this.values.pop();
     }
 
-    const maxValue = this.values[0];
+    const minValue = this.values[0];
     this.values[0] = this.values.pop();
     this.heapifyDown();
-    return maxValue;
+    return minValue;
   }
 
   /**
-   * Retrieves the maximum value from the heap
+   * Retrieves the minimum value from the heap
    * @throws {Error} - An error when the heap is empty
-   * @returns {T} - The maximum value from the heap
+   * @returns {T} - The minimum value from the heap
    */
   peek(): T {
     if (this.values.length === 0) {
@@ -106,7 +106,7 @@ class MaxHeap<T> {
     let childIndex = this.values.length - 1;
     while (
       childIndex > 0 &&
-      this.comparator.greaterThan(
+      this.comparator.lessThan(
         this.values[childIndex],
         this.values[this.getParentIndex(childIndex)]
       )
@@ -124,30 +124,30 @@ class MaxHeap<T> {
    */
   heapifyDown(parentIndex: number = 0): void {
     while (this.getLeftChildIndex(parentIndex) < this.values.length) {
-      let largerChildIndex = this.getLeftChildIndex(parentIndex);
+      let smallerChildIndex = this.getLeftChildIndex(parentIndex);
       let rightChildIndex = this.getRightChildIndex(parentIndex);
 
       if (
         rightChildIndex < this.values.length &&
-        this.comparator.greaterThan(
+        this.comparator.lessThan(
           this.values[rightChildIndex],
-          this.values[largerChildIndex]
+          this.values[smallerChildIndex]
         )
       ) {
-        largerChildIndex = rightChildIndex;
+        smallerChildIndex = rightChildIndex;
       }
 
       if (
-        this.comparator.greaterThanOrEqual(
+        this.comparator.lessThanOrEqual(
           this.values[parentIndex],
-          this.values[largerChildIndex]
+          this.values[smallerChildIndex]
         )
       ) {
         break;
       }
 
-      this.swap(parentIndex, largerChildIndex);
-      parentIndex = largerChildIndex;
+      this.swap(parentIndex, smallerChildIndex);
+      parentIndex = smallerChildIndex;
     }
   }
 
@@ -188,4 +188,4 @@ class MaxHeap<T> {
   }
 }
 
-export default MaxHeap;
+export default MinHeap;

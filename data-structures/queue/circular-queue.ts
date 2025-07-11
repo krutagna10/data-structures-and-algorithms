@@ -28,7 +28,9 @@ class CircularQueue<T> {
    * @returns {void}
    */
   enqueue(value: T): void {
-    if (this.isFull()) throw new Error("Queue Overflow");
+    if (this.isFull()) {
+      throw new Error("Queue Overflow");
+    }
 
     if (this.isEmpty()) {
       this.front = 0;
@@ -41,7 +43,9 @@ class CircularQueue<T> {
   }
 
   dequeue(): T {
-    if (this.isEmpty()) throw new Error("Queue Underflow");
+    if (this.isEmpty()) {
+      throw new Error("Queue Underflow");
+    }
 
     const removedElement = this.peek();
     if (this.front === this.rear) {
@@ -55,17 +59,10 @@ class CircularQueue<T> {
   }
 
   peek(): T {
-    if (this.isEmpty()) throw new Error("Queue is Empty");
-    return this.items[this.front];
-  }
-
-  toArray(): T[] {
-    if (this.isEmpty()) return [];
-    const values = [];
-    for (let i = 0; i < this.size; i++) {
-      values.push(this.items[(this.front + i) % this.maxSize]);
+    if (this.isEmpty()) {
+      throw new Error("Queue is Empty");
     }
-    return values;
+    return this.items[this.front];
   }
 
   isEmpty() {
